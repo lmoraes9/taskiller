@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<header class="header">
+    <h1>Hi, Leonardo!</h1>
+    <!-- Search and user profile can be added here later -->
+</header>
+
+<div class="dashboard-grid">
+    <!-- Tasks Section -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">My Tasks</h3>
+        </div>
+        <!-- Task Form -->
+        <form action="{{ url_for('add_task') }}" method="post" style="display: flex; gap: 10px; margin-bottom: 1rem;">
+            <input type="text" name="description" placeholder="New task..." required style="flex-grow: 1; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px;">
+            <input type="hidden" name="priority" value="3"> <!-- Default priority -->
+            <button type="submit" style="padding: 8px 12px; border: none; background-color: var(--primary-color); color: white; border-radius: 6px; cursor: pointer;">Add</button>
+        </form>
+        <!-- Task List -->
+        <div>
+            {% for task in tasks %}
+                <div style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">{{ task.description }}</div>
+            {% else %}
+                <p style="color: var(--text-secondary);">No tasks yet. Looks clean!</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Events Section -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Upcoming Events</h3>
+        </div>
+        <!-- Event Form -->
+        <form action="{{ url_for('add_event') }}" method="post" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 1rem;">
+            <input type="text" name="description" placeholder="New event..." required style="padding: 8px; border: 1px solid var(--border-color); border-radius: 6px;">
+            <input type="date" name="date" required style="padding: 8px; border: 1px solid var(--border-color); border-radius: 6px;">
+            <button type="submit" style="padding: 8px 12px; border: none; background-color: var(--accent-orange); color: white; border-radius: 6px; cursor: pointer;">Add Event</button>
+        </form>
+         <!-- Event List -->
+        <div>
+            {% for event in events %}
+                <div style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                    <strong>{{ event.date.strftime('%d %b') }}:</strong> {{ event.description }}
+                </div>
+            {% else %}
+                <p style="color: var(--text-secondary);">No upcoming events.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

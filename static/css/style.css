@@ -1,0 +1,169 @@
+/* --- CSS Variables for Easy Theming --- */
+:root {
+    --bg-primary: #F4F7FE; /* Light lavender background */
+    --bg-secondary: #FFFFFF;
+    --primary-color: #6A67EA; /* Main purple color */
+    --primary-light: #E8E7FD;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --accent-orange: #FDBA74;
+    --border-color: #E5E7EB;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* --- General Resets & Body --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 260px; /* Fixed width for sidebar on desktop */
+    background-color: var(--bg-secondary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar-header h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.sidebar-nav {
+    margin-top: 3rem;
+    flex-grow: 1; /* Pushes footer to the bottom */
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-item:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.nav-item.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.nav-item i {
+    width: 20px; /* Aligns text */
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* --- Card Styles (for widgets) --- */
+.card {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* --- Grid for Dashboard Layout --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* --- Kindle & Mobile First Styling --- */
+/* For screens narrower than 768px (like a Kindle vertically) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stacks main content below sidebar */
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        flex-direction: row; /* Horizontal sidebar */
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0;
+    }
+    
+    .nav-item {
+        padding: 0.5rem;
+        margin-bottom: 0;
+    }
+
+    .nav-item span { /* Hides text on mobile, showing only icons */
+        display: none;
+    }
+
+    .sidebar-header, .sidebar-footer {
+        display: none; /* Hides header/footer on mobile for simplicity */
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+}

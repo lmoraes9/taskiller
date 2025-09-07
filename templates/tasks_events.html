@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Tasks & Events{% endblock %}
+
+{% block content %}
+    <h1>My Tasks & Events</h1>
+
+    <div style="display: flex; gap: 30px;">
+        <!-- Formulário de Tarefas -->
+        <div style="flex: 1;">
+            <h2>Add New Task</h2>
+            <form action="{{ url_for('add_task') }}" method="post">
+                <p><input type="text" name="description" placeholder="Task Description" required style="width: 100%; padding: 8px;"></p>
+                <p>
+                    <label for="priority">Priority:</label>
+                    <select name="priority" id="priority" style="padding: 8px;">
+                        <option value="1">1 (Low)</option>
+                        <option value="2">2</option>
+                        <option value="3" selected>3 (Medium)</option>
+                        <option value="4">4</option>
+                        <option value="5">5 (High)</option>
+                    </select>
+                </p>
+                <button type="submit">Add Task</button>
+            </form>
+
+            <h2 style="margin-top: 30px;">Task List</h2>
+            <ul>
+                {% for task in tasks %}
+                    <li>{{ task.description }} (Priority: {{ task.priority }})</li>
+                {% else %}
+                    <li>No tasks yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Formulário de Eventos -->
+        <div style="flex: 1;">
+            <h2>Add New Event</h2>
+            <form action="{{ url_for('add_event') }}" method="post">
+                <p><input type="text" name="description" placeholder="Event Description" required style="width: 100%; padding: 8px;"></p>
+                <p><input type="date" name="date" required style="width: 100%; padding: 8px;"></p>
+                <button type="submit">Add Event</button>
+            </form>
+
+            <h2 style="margin-top: 30px;">Event List</h2>
+            <ul>
+                {% for event in events %}
+                    <li>{{ event.description }} - {{ event.date.strftime('%d/%m/%Y') }}</li>
+                {% else %}
+                    <li>No events yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

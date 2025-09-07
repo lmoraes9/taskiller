@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - My Planner{% endblock %}
+
+{% block content %}
+    <div style="text-align: center; padding: 50px;">
+        <h1>Welcome to Your Personal Planner</h1>
+        <p>Organize your life, one task at a time.</p>
+        <a href="{{ url_for('tasks_events') }}" style="display: inline-block; margin-top: 20px; padding: 12px 25px; background-color: #007bff; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+            Get Started
+        </a>
+    </div>
+{% endblock %}
